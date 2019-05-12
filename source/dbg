@@ -1,0 +1,82 @@
+
+//quote in the final stage
+int main()
+{
+  FILE *fp = fopen("data/index", "r+");
+  FILE *auth = fopen("data/authData", "r+");
+  char retArr[uSize+1] = {0};
+  //addusr("root", "0", auth, "index");
+  //addusr("root2", "02", auth, "index2");
+  printf("%d\n", userCount(auth));
+ 
+  
+  addusr("master", "1234", auth, "data/index");
+  addusr("whocares", "awf.:,./:;pka0o23", auth,  "NULL");
+  auth = delUser("root2", auth, "data/authData");
+  printf("%d\n", begin_auth("master", "1234", auth, retArr));
+  printf("%d\n", checkUsername("master", auth));
+  auth = delUser("whocares", auth, "data/authData");
+
+  initializeBooks(fp);
+  int arr[8] = {1, 8};
+  editDes(3, fp, NULL);
+  char tmpArr[recSize];
+  puts("!!!!!!!!!!BEFORE THE DELETE!!!!!!!!");
+  for (int i = 1; i <=tailID; i++)
+    {
+      returnRecord(fp, i, tmpArr);
+      printf("%d:\t%s\n", i, tmpArr);
+    }
+    
+  puts("\n!!!!!!!After delete!!!!!!!!\n");
+  fp  = delRecords(fp, arr, 2, "data/index");
+    
+  for(int i = 1; i <= tailID; i++)
+    {
+      returnRecord(fp, i, tmpArr);
+      printf("%d:\t%s\n", i, tmpArr);
+    }
+    
+    
+  /*
+    addRecord(fp, COMP, "Jane Carol", "12", "Science of Computing", "A book about C programming\n There are lots of things to learn here");
+    addRecord(fp, BIO, "Charles Darwin", "4", "A Theory of Biological Evolution", "A good hypothesis but a theory based on circumstances");
+    addRecord(fp, PHYS, "Isaac Newton", "3", "Philosophiæ Naturalis Principia Mathematica", "Aka a genius");
+  
+    addRecord(fp, ARTS, "Stress test | boooiafnakekjfn/;", "41245", "e0q-pjrnoibq3uitu0o;@lt@qjtoilqnkubneugbq3tq3", "d72qoerpkq:.:[@p^ikpik:p/.l,.,pjqp82hyhqiufgbqi7682gbf23;:.,:<>+?_<>*+P\n\nop:p");
+  
+  
+     
+    editCategory(3, fp, PHYS);
+    editCategory(4, fp, ARTS);
+    editName(8, fp, "Hopex music");
+    editName(1, fp, "abcdefghijklmnopqrstuvwxyz");
+    editRack(2, fp, "314");
+    editRack(8, fp, "12345");
+    editTitle(8, fp, "hello");
+    editTitle(7, fp, "welp ....");
+    editDes(8, fp, "making it short");
+    editDes(1, fp, "blah blah...");
+
+  */
+  /*
+    char retArr[recSize];
+    int *arrID = malloc(sizeof(int)*tailID);
+    int loop;
+    loop = searchDes(fp, arrID, "e");
+    for (int i = 0; i < loop; i++)
+    {
+    returnRecord(fp, arrID[i], retArr);
+    printf("%s\n", retArr);
+    
+    }
+    printf("%d records\n", loop);
+    free(arrID);
+  */
+
+  
+  closeBooks();
+  fclose(fp);
+}
+
+//delete in final stage
